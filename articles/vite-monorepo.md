@@ -10,13 +10,10 @@ published: false
 
 こんにちは、[Unlace](https://www.unlace.net/)を運営している株式会社Unlaceの岩下です。
 
-Unlaceでは、ユーザー向けにカウンセリング機能を提供する[Unlace](https://unlace.net/)のほか、登録カウンセラーの方が利用するUnlace for
-counselor、企業が従業員に対してUnlaceの利用料金を負担する仕組みを提供する[Unlace for business](https://www.unlace.net/business)
-があり、全部で3つのサービスを提供しています。
+Unlaceでは、ユーザー向けにカウンセリング機能を提供する[Unlace](https://unlace.net/)のほか、登録カウンセラーの方が利用するUnlace for counselor、企業が従業員に対してUnlaceの利用料金を負担する仕組みを提供する[Unlace for business](https://www.unlace.net/business)があり、全部で3つのサービスを提供しています。
 この内、UnlaceとUnlace for counselorはWebのほかiOS/Android向けのアプリでも提供しています。
 
-全サービス共通でWebはReact、アプリはReactNativeを使用しており、[react-native-web](https://necolas.github.io/react-native-web/)
-を用いて実装の大部分を共通化しています。
+全サービス共通でWebはReact、アプリはReactNativeを使用しており、[react-native-web](https://necolas.github.io/react-native-web/)を用いて実装の大部分を共通化しています。
 また、共通部分の実装作業を効率化するため、これら全てを一つのリポジトリで管理する、いわゆるmonorepo構成となっています。
 今回は、このmonorepo構成においてWeb部分の開発サーバーを[Vite](https://ja.vitejs.dev/)で構築した事例について紹介します。
 
@@ -394,11 +391,8 @@ resolve: {
 
 ## Web用のコードを読み込む
 
-ReactNative向けに提供されているパッケージには、[react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler)
-のようにreact-native-web向けのコードが[同梱されている](https://unpkg.com/browse/react-native-gesture-handler@2.4.2/lib/commonjs/RNGestureHandlerModule.web.js)
-ことがあります。
-create-react-appは[標準](https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/config/paths.js#L37)
-でこういったコードを読み込んでくれますが、Viteにはそういった仕組みは無いため、`resolve.extensions`に追加しweb向けコードがある場合は優先的に読むようします。
+ReactNative向けに提供されているパッケージには、[react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler)のようにreact-native-web向けのコードが[同梱されている](https://unpkg.com/browse/react-native-gesture-handler@2.4.2/lib/commonjs/RNGestureHandlerModule.web.js)ことがあります。
+create-react-appは[標準](https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/config/paths.js#L37)でこういったコードを読み込んでくれますが、Viteにはそういった仕組みは無いため、`resolve.extensions`に追加しweb向けコードがある場合は優先的に読むようします。
 また、`resolve.extensions`に追加するだけでは`vite dev`時に読み込んでくれないため、`optimizeDeps.esbuildOptions.resolveExtensions`にも同様の指定を追加しています。
 
 ```typescript:vite.config.ts
